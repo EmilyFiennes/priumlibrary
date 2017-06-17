@@ -1,0 +1,5 @@
+= flash.select { |type| %i(alert notice).include?(type) }.each do |type, message |
+  %div{:class => "alert #{bootstrap_class_for(type)} fade in"}
+    %button.close{"data-dismiss" => "alert"} x
+    = message
+

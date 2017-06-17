@@ -1,0 +1,17 @@
+#edit-customer
+  .row
+    .col-xs-12
+      .container.padded
+        .panel.panel-default
+          .panel-heading
+            = @customer.firstname + ' ' + @customer.lastname
+          .panel-body
+            .edit-customer-form
+              = simple_form_for @customer, url: update_customer_path(@customer) do |f|
+                = f.error_notification
+                = f.input :firstname
+                = f.input :lastname
+                = f.input :email
+                = f.input :avatar, as: :file
+                = f.button :submit
+

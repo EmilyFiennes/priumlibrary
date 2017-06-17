@@ -1,0 +1,24 @@
+#customer-info
+  .container.padded
+    .row
+      .col-xs-12
+        = link_to "Back to all customers", customers_path, class: "btn btn-success btn-sm active"
+    .row.padding-top-10
+      .col-xs-12
+        .panel.panel-default
+          .panel-heading
+            %h4= @customer.firstname + ' ' + @customer.lastname
+          .panel-body
+            .customer-avatar
+              - if @customer.avatar.present?
+                = image_tag @customer.avatar.url, {class: "avatar avatar-large"}
+              - else
+                = image_tag "missing.png", {class: "avatar avatar-large"}
+            .customer-history
+              .customer-passed-loans
+              .customer-current-loans
+
+
+
+
+

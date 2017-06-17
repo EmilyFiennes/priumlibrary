@@ -1,0 +1,15 @@
+@import "home";
+
+#customers-index {
+  padding-top: 10px;
+}
+
+#books-index {
+  padding-top: 10px;
+}
+
+.customer-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

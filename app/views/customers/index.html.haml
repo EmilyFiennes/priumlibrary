@@ -1,0 +1,25 @@
+#customers-index
+  .container
+    .row
+      .col-xs-12
+        .panel.panel-default
+          .panel-heading
+            = link_to "Add a new customer", new_customer_path(@customer), class: "btn btn-success btn-sm active"
+
+    .row
+      .col-xs-12
+        .panel.panel-default
+          .panel-heading
+            Users
+          .ul
+            - @customers.each do |c|
+              .li.list-group-item
+                = c.firstname + ' ' + c.lastname
+                %a.btn.btn-primary.btn-sm.active{:href => customer_path(c), :role=> "button"} View customer
+                %a.btn.btn-primary.btn-sm.active{:href => edit_customer_path(c), :role=> "button"} Edit customer
+                = link_to "Delete customer", delete_customer_path(c), class: "btn btn-danger btn-sm active", method: :delete, data: {confirm: "Are you sure you wish to permanently delete this user?"}
+
+    .row
+      .col-xs-3.col-xs-offset-9
+        = paginate @customers
+

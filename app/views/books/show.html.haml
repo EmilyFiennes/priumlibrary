@@ -1,0 +1,35 @@
+#book-info
+  .container.padded
+    .row
+      .col-xs-12
+        = link_to "Back to all books", books_path, class: "btn btn-success btn-sm active"
+    .row.padding-top-10
+      .col-xs-12
+        .panel.panel-default
+          .panel-heading
+            %h4 Title and Author
+          .panel-body
+            = @book.title
+            by
+            = @book.author
+    - if !!@book.summary
+      .row
+        .col-xs-12
+          .panel.panel-default
+            .panel-heading
+              %h4 Summary
+            .panel-body
+              = @book.summary
+      .row
+        .col-xs-12
+          .panel.panel-default
+            .panel-heading
+              %h4 Status and Loan History
+            .panel-body
+              Status:
+              .br
+              History
+              .ul
+                .li Loan 1
+                .li Loan 2
+                .li Loan 3

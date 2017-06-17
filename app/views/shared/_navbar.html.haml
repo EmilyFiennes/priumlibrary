@@ -1,0 +1,32 @@
+.navbar-prium
+  / Logo
+  = link_to root_path, class: "navbar-prium-brand" do
+    = image_tag "logo.png"
+  / Right Navigation
+  .navbar-prium-right.hidden-xs.hidden-sm
+    = link_to customers_path, class: "navbar-prium-item navbar-prium-link" do
+      .badge-container
+        %i.fa.fa-user
+    = link_to books_path, class: "navbar-prium-item navbar-prium-link" do
+      .badge-container
+        %i.fa.fa-book
+    = link_to root_path, class: "navbar-prium-item navbar-prium-link" do
+      .badge-container
+        %i.fa.fa-home
+    / Action dropdown
+    .navbar-prium-item
+      .dropdown
+        = image_tag "borrow.png", class: " dropdown-toggle", id: "navbar-prium-menu", "data-toggle" => "dropdown"
+        %ul.dropdown-menu.dropdown-menu-right.navbar-prium-dropdown-menu
+          %li
+            = link_to "#" do
+              %i.fa.fa-plus
+              = t(".profile", default: "New loan")
+          %li
+            = link_to "#" do
+              %i.fa.fa-hourglass-end
+              = t(".profile", default: "Returns")
+
+    / Button (call-to-action)
+    = link_to t(".top_call_to_action", default: "Post stuff"), "#", class: "navbar-prium-item navbar-prium-button btn"
+

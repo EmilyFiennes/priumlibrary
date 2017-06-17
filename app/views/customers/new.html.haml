@@ -1,0 +1,16 @@
+#new-customer
+  .row
+    .col-xs-12
+      .container.padded
+        .panel.panel-default
+          .panel-heading
+            New customer
+          .panel-body
+            .new-customer-form
+              = simple_form_for @customer, url: create_customer_path(@customer) do |f|
+                = f.error_notification
+                = f.input :firstname
+                = f.input :lastname
+                = f.input :email, placeholder: 'newcustomer@email.com'
+                = f.input :avatar, as: :file
+                = f.button :submit
