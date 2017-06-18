@@ -34,6 +34,7 @@ gem "simple_form"
 gem "autoprefixer-rails"
 gem "paperclip", "~> 5.0.0"
 gem 'kaminari'
+gem 'aasm', '~> 4.12'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

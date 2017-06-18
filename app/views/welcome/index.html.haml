@@ -10,17 +10,28 @@
             Books
           .panel-body
             %ul
-              %li bla
-              %li bla
-              %li bla
+              %li
+                Total books in library:
+                = @books.size
+              %li
+                Total books currently on loan:
+                = @loans.outstanding.size
+              %li
+                Total books currently available for loan:
+                = @books.can_be_loaned.size
+
     .row
       .col-xs-12
         .panel.panel-default
           .panel-heading
-            Users
+            Customers
           .panel-body
             %ul
-              %li bla
-              %li bla
-              %li bla
+              %li
+                Total customers:
+                = @customers.size
+              %li
+                Total customers with past or current loans:
+                = @customers.total_having_loans
+
 

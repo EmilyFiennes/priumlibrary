@@ -1,0 +1,16 @@
+#loan-customer-search
+  .container.padded
+    .row
+      .col-xs-12
+        %h2 New loan: Search for Customer
+    .row
+      .col-xs-12
+        .panel.panel-default
+          .panel-heading
+            Find a customer by entering their email address:
+          .panel-body
+            .loan-customer-search-form
+              = simple_form_for @customer, url: find_customer_path do |f|
+                = f.error_notification
+                = f.input :email, placeholder: 'newcustomer@email.com'
+                = f.button :submit, "Find customer"

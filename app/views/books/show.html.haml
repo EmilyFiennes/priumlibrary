@@ -20,16 +20,15 @@
               %h4 Summary
             .panel-body
               = @book.summary
-      .row
-        .col-xs-12
-          .panel.panel-default
-            .panel-heading
-              %h4 Status and Loan History
-            .panel-body
-              Status:
-              .br
-              History
-              .ul
-                .li Loan 1
-                .li Loan 2
-                .li Loan 3
+    .row
+      .col-xs-12
+        .panel.panel-default
+          .panel-heading
+            %h4 Status
+          .panel-body
+            - if @book.loan_outstanding?
+              - customer = @book.current_outstanding_loan.customer
+              %a.btn.btn-primary.btn-sm.active{:href => customer_path(customer), :role=> "button"} #{display_name(customer)}
+            - else
+              %a.btn.btn-primary.btn-sm{:href => customer_search_form_path, :role=> "button"} Available
+

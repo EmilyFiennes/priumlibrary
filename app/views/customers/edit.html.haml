@@ -4,7 +4,7 @@
       .container.padded
         .panel.panel-default
           .panel-heading
-            = @customer.firstname + ' ' + @customer.lastname
+            = diplsay_name(@customer)
           .panel-body
             .edit-customer-form
               = simple_form_for @customer, url: update_customer_path(@customer) do |f|

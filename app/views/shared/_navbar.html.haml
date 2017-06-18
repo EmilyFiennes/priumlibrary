@@ -19,14 +19,10 @@
         = image_tag "borrow.png", class: " dropdown-toggle", id: "navbar-prium-menu", "data-toggle" => "dropdown"
         %ul.dropdown-menu.dropdown-menu-right.navbar-prium-dropdown-menu
           %li
-            = link_to "#" do
+            = link_to customer_search_form_path do
               %i.fa.fa-plus
               = t(".profile", default: "New loan")
           %li
-            = link_to "#" do
+            = link_to book_returns_search_form_path do
               %i.fa.fa-hourglass-end
               = t(".profile", default: "Returns")
-
-    / Button (call-to-action)
-    = link_to t(".top_call_to_action", default: "Post stuff"), "#", class: "navbar-prium-item navbar-prium-button btn"
-

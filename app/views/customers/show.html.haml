@@ -7,13 +7,66 @@
       .col-xs-12
         .panel.panel-default
           .panel-heading
-            %h4= @customer.firstname + ' ' + @customer.lastname
+            %h4= display_name(@customer)
           .panel-body
-            .customer-avatar
-              - if @customer.avatar.present?
-                = image_tag @customer.avatar.url, {class: "avatar avatar-large"}
-              - else
-                = image_tag "missing.png", {class: "avatar avatar-large"}
+            .row
+              .col-xs-2.col-xs-offset-10
+                .customer-avatar
+                  - if @customer.avatar.present?
+                    = image_tag @customer.avatar.url, {class: "avatar avatar-large"}
+                  - else
+                    = image_tag "missing.png", {class: "avatar avatar-large"}
+            .row
+              .col-xs-12
+                %h4
+                  Email address:
+                = @customer.email
+        - if @customer.books.loan_outstanding.any?
+          .row
+            .col-xs-12
+              .panel.panel-default
+                .panel-heading
+                  Current Loans
+                .panel-body
+                  .row
+                    .col-xs-12
+                      .ul
+                        - @customer.books.loan_outstanding.each do |b|
+                          = link_to book_path(b) do
+                            .li.list-group-item
+                              .row
+                                .col-xs-3
+                                  %h4
+                                    Book title:
+                                  = b.title
+                                .col-xs-3
+                                  %h4
+                                    Book author:
+                                  = b.author
+        - if @customer.books.can_be_loaned.any?
+          .row
+            .col-xs-12
+              .panel.panel-default
+                .panel-heading
+                  Loan History
+                .panel-body
+                  .row
+                    .col-xs-12
+                      .ul
+                        - @customer.books.can_be_loaned.each do |b|
+                          = link_to book_path(b) do
+                            .li.list-group-item
+                              .row
+                                .col-xs-3
+                                  %h4
+                                    Book title:
+                                  = b.title
+                                .col-xs-3
+                                  %h4
+                                    Book author:
+                                  = b.author
+
+
             .customer-history
               .customer-passed-loans
               .customer-current-loans

@@ -2,6 +2,9 @@
   .container
     .row
       .col-xs-12
+        %h2 Books
+    .row
+      .col-xs-12
         .panel.panel-default
           .panel-heading
             = link_to "Add a new book", new_book_path(@book), class: "btn btn-success btn-sm active"
@@ -13,12 +16,24 @@
           .ul
             - @books.each do |b|
               .li.list-group-item
-                = b.title
-                by
-                = b.author
-                %a.btn.btn-primary.btn-sm.active{:href => book_path(b), :role=> "button"} View book
-                %a.btn.btn-primary.btn-sm.active{:href => edit_book_path(b), :role=> "button"} Edit book
-                = link_to "Delete book", delete_book_path(b), class: "btn btn-danger btn-sm active", method: :delete, data: {confirm: "Are you sure you wish to permanently delete this book?"}
+                .row
+                  .col-xs-3
+                    = b.title
+                    by
+                    = b.author
+                  .col-xs-2
+                    %a.btn.btn-primary.btn-sm.active{:href => book_path(b), :role=> "button"} View book
+                  .col-xs-2
+                    %a.btn.btn-primary.btn-sm.active{:href => edit_book_path(b), :role=> "button"} Edit book
+                  .col-xs-2
+                    = link_to "Delete book", delete_book_path(b), class: "btn btn-danger btn-sm active", method: :delete, data: {confirm: "Are you sure you wish to permanently delete this book?"}
+                  .col-xs-3
+                    - if b.loan_outstanding?
+                      - customer = b.current_outstanding_loan.customer
+                      %a.btn.btn-primary.btn-sm.active{:href => customer_path(customer), :role=> "button"} #{display_name(customer)}
+                    - else
+                      %a.btn.btn-primary.btn-sm Available
+
     .row
       .col-xs-3.col-xs-offset-9
         = paginate @books

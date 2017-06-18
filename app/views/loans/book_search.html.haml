@@ -1,0 +1,20 @@
+#loan-book-search
+  .container.padded
+    .row
+      .col-xs-12
+        %h2 New loan: Search for Book
+    .row
+      .col-xs-12
+        .panel.panel-default
+          .panel-heading
+            Customer:
+            = display_name(@customer)
+          .panel-heading
+            Find a book by entering its title:
+          .panel-body
+            .loan-book-search-form
+              = simple_form_for @book, url: find_book_path do |f|
+                = f.error_notification
+                = f.input :title, placeholder: 'Gone with the wind'
+                = f.input :customer_id, :as => :hidden, input_html: { value: @customer.id }
+                = f.button :submit, "Find books"

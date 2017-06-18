@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170617124153) do
+ActiveRecord::Schema.define(version: 20170618095518) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20170617124153) do
     t.text     "summary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "aasm_state"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -37,6 +38,16 @@ ActiveRecord::Schema.define(version: 20170617124153) do
     t.string   "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "loans", force: :cascade do |t|
+    t.integer  "book_id"
+    t.integer  "customer_id"
+    t.datetime "finished_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["book_id"], name: "index_loans_on_book_id"
+    t.index ["customer_id"], name: "index_loans_on_customer_id"
   end
 
 end
