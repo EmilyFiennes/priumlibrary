@@ -21,12 +21,6 @@ class Book < ApplicationRecord
     end
   end
 
-  def return!
-    @loan = Loan.find_by(book_id: self.id, finished_at: nil)
-    @loan.finished_at = Time.now
-    @loan.save!
-  end
-
   def can_be_loaned?
     self.loans.where(finished_at: nil).none?
   end
@@ -38,7 +32,7 @@ class Book < ApplicationRecord
   def can_be_deleted?
     if self.loan_outstanding?
       errors[:base] << "Cannot delete book whilst loan is still outstanding"
-      return false
+      throw :abort
     end
   end
 

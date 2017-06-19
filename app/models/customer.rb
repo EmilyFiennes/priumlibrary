@@ -15,7 +15,11 @@ class Customer < ApplicationRecord
     Customer.joins(:loans).where("loans.customer_id = customer_id").uniq.count
   end
 
+  private
+
   def can_be_deleted?
-    self.loans.outstanding.none?
+    if self.loans.outstanding.any?
+      throw :abort
+    end
   end
 end

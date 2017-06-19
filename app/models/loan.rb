@@ -6,7 +6,7 @@ class Loan < ApplicationRecord
   validates :book_id, presence: true
 
 
-  before_validation :ended_at_after_created_at, on: :update, if: Proc.new { |l| l.finished? }
+  validate :ended_at_after_created_at?, on: :update, if: Proc.new { |l| l.finished_just_now? }
 
 
   def self.outstanding
@@ -14,11 +14,17 @@ class Loan < ApplicationRecord
   end
 
   def finished?
-    !!self.finished_at
+    !!finished_at
   end
 
-  def ended_at_after_created_at
-    !!(self.finished_at > self.created_at)
+  def finished_just_now?
+    finished? && finished_at_changed?
   end
 
+  def ended_at_after_created_at?
+    unless !!self.finished_at && (self.finished_at > self.created_at)
+      errors.add(:base, "The return date cannot be before the loan start date.")
+      return false
+    end
+  end
 end

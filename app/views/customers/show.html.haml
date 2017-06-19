@@ -10,17 +10,16 @@
             %h4= display_name(@customer)
           .panel-body
             .row
-              .col-xs-2.col-xs-offset-10
-                .customer-avatar
+              .customer-avatar
+                .col-xs-2.col-xs-offset-10
                   - if @customer.avatar.present?
                     = image_tag @customer.avatar.url, {class: "avatar avatar-large"}
                   - else
                     = image_tag "missing.png", {class: "avatar avatar-large"}
-            .row
-              .col-xs-12
-                %h4
-                  Email address:
-                = @customer.email
+                .col-xs-3.col-xs-offset-9
+                  %h4
+                    Email address:
+                  = @customer.email
         - if @customer.books.loan_outstanding.any?
           .row
             .col-xs-12

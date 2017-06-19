@@ -3,7 +3,6 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all.order(:title).page params[:page]
-    # @books = Book.all.take(3)
   end
 
   def show
@@ -35,10 +34,11 @@ class BooksController < ApplicationController
 
   def destroy
     if @book.destroy
-      flash[:success] = "#{@book.title} by #{@book.author} has successfully been deleted from the system"
+      flash[:alert] = "#{@book.title} by #{@book.author} has successfully been deleted from the system."
       redirect_to books_path
     else
-      flash[:error] = Unable to delete user
+      flash[:alert] = "Unable to delete book whilst still on loan."
+      redirect_to books_path
     end
   end
 

@@ -18,8 +18,10 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
     if @customer.save(customer_params)
+      flash[:alert] = "#{@customer.firstname} #{@customer.lastname} has successfully been added to the system"
       redirect_to customer_path(@customer)
     else
+      flash[:alert] = "Unable to create customer"
       render :new
     end
   end
@@ -34,10 +36,11 @@ class CustomersController < ApplicationController
 
   def destroy
     if @customer.destroy
-      flash[:success] = "#{@customer.firstname} #{@customer.lastname} has successfully been deleted from the system"
+      flash[:alert] = "#{@customer.firstname} #{@customer.lastname} has successfully been deleted from the system"
       redirect_to customers_path
     else
-      flash[:error] = Unable to delete user
+      flash[:alert] = "Unable to delete customer with outstanding loans"
+      redirect_to customers_path
     end
   end
 

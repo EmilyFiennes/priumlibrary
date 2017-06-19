@@ -1,7 +1,4 @@
 class LoansController < ApplicationController
-  before_action :set_loan, only: [:show]
-
-
   def customer_search
     @customer = Customer.new
   end
@@ -73,10 +70,6 @@ class LoansController < ApplicationController
 
 
   private
-
-  def set_loan
-    @loan = Loan.find_by(params[:id])
-  end
 
   def loan_params
     params.require(:loan).permit(:customer_id, :book_id, :finished_at)
