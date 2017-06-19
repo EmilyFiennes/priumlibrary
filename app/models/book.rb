@@ -8,7 +8,7 @@ class Book < ApplicationRecord
   validates :title, presence: true, uniqueness: true
   validates :author, presence: true
 
-  aasm do
+  aasm :create_scopes => false do
     state :available, :initial => true
     state :on_loan
 
