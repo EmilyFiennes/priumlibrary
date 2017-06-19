@@ -12,20 +12,22 @@ class BooksController < ApplicationController
     @book = Book.new
   end
 
-  def edit
-  end
-
   def create
     @book = Book.new(book_params)
     if @book.save(book_params)
+      flash[:success] = "Book has successfully been added to the system"
       redirect_to book_path(@book)
     else
       render :new
     end
   end
 
+  def edit
+  end
+
   def update
     if @book.update(book_params)
+      flash[:success] = "Book has successfully been updated"
       redirect_to book_path(@book)
     else
       render :edit
@@ -37,11 +39,10 @@ class BooksController < ApplicationController
       flash[:alert] = "#{@book.title} by #{@book.author} has successfully been deleted from the system."
       redirect_to books_path
     else
-      flash[:alert] = "Unable to delete book whilst still on loan."
+      flash[:alert] = @book.errors.full_messages.join(", ")
       redirect_to books_path
     end
   end
-
 
   private
 

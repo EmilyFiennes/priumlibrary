@@ -12,13 +12,13 @@
             %ul
               %li
                 Total books in library:
-                = @books.size
+                = Book.all.size
               %li
                 Total books currently on loan:
-                = @loans.outstanding.size
+                = Loan.outstanding.size
               %li
                 Total books currently available for loan:
-                = @books.can_be_loaned.size
+                = Book.available.size
 
     .row
       .col-xs-12
@@ -29,9 +29,9 @@
             %ul
               %li
                 Total customers:
-                = @customers.size
+                = Customer.all.size
               %li
                 Total customers with past or current loans:
-                = @customers.total_having_loans
+                = Loan.all.uniq_customers_count
 
 

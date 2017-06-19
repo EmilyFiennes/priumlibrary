@@ -1,15 +1,14 @@
 #new-book
   .row
     .col-xs-12
-      .container.padded
-        .panel.panel-default
-          .panel-heading
-            New book
-          .panel-body
-            .new-customer-form
-              = simple_form_for @book, url: create_book_path(@book) do |f|
-                = f.error_notification
-                = f.input :title
-                = f.input :author
-                = f.input :summary, hint: 'A summary is not compulsory but is a good idea!'
-                = f.button :submit
+      .panel.panel-default
+        .panel-heading
+          New book
+        .panel-body
+          .new-customer-form
+            = simple_form_for @book, url: create_book_path(@book) do |f|
+              = f.error_notification
+              = f.input :title
+              = f.input :author
+              = f.input :summary, hint: 'A summary is not compulsory but is a good idea!'
+              = f.button :submit

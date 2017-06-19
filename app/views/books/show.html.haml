@@ -2,14 +2,12 @@
   .container.padded
     .row
       .col-xs-12
-        = link_to "Back to all books", books_path, class: "btn btn-success btn-sm active"
-    .row.padding-top-10
+        = link_to "Back to all books", books_path, class: "btn btn-success"
+    .row
       .col-xs-12
-        .panel.panel-default
-          .panel-heading
-            %h4 Title and Author
-          .panel-body
-            = @book.title
+        %h1
+          = @book.title
+          %small
             by
             = @book.author
     - if !!@book.summary
@@ -17,18 +15,19 @@
         .col-xs-12
           .panel.panel-default
             .panel-heading
-              %h4 Summary
+              %h2 Summary
             .panel-body
-              = @book.summary
+              %p = @book.summary
     .row
       .col-xs-12
         .panel.panel-default
           .panel-heading
-            %h4 Status
+            %h3 Status
           .panel-body
-            - if @book.loan_outstanding?
+            - if @book.on_loan?
               - customer = @book.current_outstanding_loan.customer
-              %a.btn.btn-primary.btn-sm.active{:href => customer_path(customer), :role=> "button"} #{display_name(customer)}
+              On loan:
+              = link_to display_name(customer), customer_path(customer)
             - else
-              %a.btn.btn-primary.btn-sm{:href => customer_search_form_path, :role=> "button"} Available
+              Available
 

@@ -1,18 +1,16 @@
 #edit-book
-  .row
-    .col-xs-12
-      .container.padded
-        .panel.panel-default
-          .panel-heading
-            %h4
-              = @book.title
-              by
-              = @book.author
-          .panel-body
-            .edit-book-form
-              = simple_form_for @book, url: update_book_path(@book) do |f|
-                = f.error_notification
-                = f.input :title
-                = f.input :author
-                = f.input :summary
-                = f.button :submit
+  .panel.panel-default
+    .panel-heading
+      %h1
+        = @book.title
+        %small
+          by
+          = @book.author
+    .panel-body
+      .edit-book-form
+        = simple_form_for @book, url: update_book_path(@book) do |f|
+          = f.error_notification
+          = f.input :title
+          = f.input :author
+          = f.input :summary
+          = f.button :submit

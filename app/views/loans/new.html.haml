@@ -1,38 +1,21 @@
 #new-loan
-  .container.padded
-    .row
-      .col-xs-12
-        %h2 Review the current loan before confirming
-    .row
-      .col-xs-12
-        .panel.panel-default
-          .panel-heading
-            %h3 Loan Summary
-          .panel-heading
-            %h4 Book
-          .panel-body
-            Title:
-            = @loan.book.title
-            %br
-            Author:
-            = @loan.book.author
-          .panel-heading
-            %h4 Customer
-          .panel-body
-            Firstname:
-            = @loan.customer.firstname
-            Lastname:
-            = @loan.customer.lastname
-            %br
-            Email:
-            = @loan.customer.email
-    .row
-      .col-xs-12
-        .panel.panel-default
-          .panel-heading
-            = simple_form_for @loan, url: create_loan_path do |f|
-              = f.error_notification
-              = f.input :book_id, :as => :hidden, input_html: {value: @loan.book.id}
-              = f.input :customer_id, :as => :hidden, input_html: { value: @loan.customer.id }
-              = f.button :submit, "Confirm loan"
+  .panel.panel-default
+    .panel-heading
+      %h1 Loan Summary
+    .panel-body
+      %ul
+        %li
+          Book title:
+          = @loan.book.title
+        %li
+          Book author:
+          = @loan.book.author
+        %li
+          Customer:
+          = display_name(@loan.customer)
+    .panel-footer
+      = simple_form_for @loan, method: :post, url: create_loan_path do |f|
+        = f.input :book_id, as: :hidden, input_html: {value: @loan.book.id}
+        = f.input :customer_id, as: :hidden, input_html: { value: @loan.customer.id }
+        = f.button :submit, "Confirm loan"
 

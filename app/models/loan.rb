@@ -5,26 +5,25 @@ class Loan < ApplicationRecord
   validates :customer_id, presence: true
   validates :book_id, presence: true
 
+  validate :book_is_available, on: :create
 
-  validate :ended_at_after_created_at?, on: :update, if: Proc.new { |l| l.finished_just_now? }
-
+  after_create :update_book_state!
 
   def self.outstanding
-    Loan.where(finished_at: nil)
+    self.where(finished_at: nil)
   end
 
-  def finished?
-    !!finished_at
+  def self.uniq_customers_count
+    self.all.map(&:customer_id).uniq.count
   end
 
-  def finished_just_now?
-    finished? && finished_at_changed?
+  private
+
+  def book_is_available
+    errors.add(:book, "Book is not available.") unless book.try(:may_start_loan?)
   end
 
-  def ended_at_after_created_at?
-    unless !!self.finished_at && (self.finished_at > self.created_at)
-      errors.add(:base, "The return date cannot be before the loan start date.")
-      return false
-    end
+  def update_book_state!
+    book.start_loan!
   end
 end

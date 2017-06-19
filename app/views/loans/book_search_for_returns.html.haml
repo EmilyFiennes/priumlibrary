@@ -1,13 +1,12 @@
 #loan-book-search
-  .container.padded
-    .row
-      .col-xs-12
-        .panel.panel-default
-          .panel-heading
-            Find a book by entering its title:
-          .panel-body
-            .loan-book-search-form
-              = simple_form_for @book, url: end_loan_path do |f|
-                = f.error_notification
-                = f.input :title, placeholder: 'Gone with the wind'
-                = f.button :submit, "Return book"
+  .row
+    .col-xs-12
+      .panel.panel-default
+        .panel-heading
+          Find a book by entering its title:
+        .panel-body
+          .loan-book-search-form
+            = simple_form_for @book, method: :patch, url: finish_loan_path do |f|
+              = f.error_notification
+              = f.input :title, placeholder: 'Gone with the wind'
+              = f.button :submit, "Return book"
