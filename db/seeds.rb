@@ -17,7 +17,6 @@ puts 'Creating 10 customers'
     firstname: Faker::Name.first_name,
     lastname: Faker::Name.last_name,
     email: Faker::Internet.unique.email
-    # avatar: File.new("#{Rails.root}/app/assets/images/customers/
     )
   c.save!
 end
@@ -30,7 +29,7 @@ puts 'Creating 50 books'
   b = Book.new(
     title: Faker::Book.unique.title,
     author: Faker::Book.author,
-    summary: Faker::Lorem.sentences(rand(2..7))
+    summary: Faker::Lorem.sentences(rand(2..7)).join(', ')
     )
   b.save!
 end
